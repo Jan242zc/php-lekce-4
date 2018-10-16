@@ -13,6 +13,7 @@
 <br>
 <div class="container">
     <h1>Seznam objednávek</h1>
+     
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -22,12 +23,22 @@
                 <th>Celková cena</th>
             </tr>
         </thead>
-        <tr>
-            <td>123</td>
-            <td>Josef</td>
-            <td>1.1.2000</td>
-            <td>0 Kč</td>
+        
+<?php
+    $handle = fopen('objednavky.csv', 'r');
+    While (($line = fgets($handle, 4096)) == true){
+    $row = explode(';', $line);
+    echo "
+        <tr>            
+            <td>$row[0]</td>
+            <td>$row[3]</td>
+            <td>$row[2]</td>
+            <td>$row[1] Kč</td>
         </tr>
+    ";
+}
+    fclose($handle);
+?>         
     </table>
 </div>
 </body>
